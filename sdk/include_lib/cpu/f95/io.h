@@ -6,7 +6,7 @@
 #include "io_common.h"
 
 #define FPGA               0
-#define IDE_DEBUG_IO       0
+#define IDE_DEBUG_IO       1
 #define WDT_EN             1
 #define EX_LDO_TIRM_EN     0
 // #define PMU_CHG_BUCK       0 //f95 此项必须为0
