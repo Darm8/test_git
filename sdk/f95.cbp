@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="f95" />
+		<Option compiler="f95_assembler" />
+		<Build>
+			<Target title="Release">
+				<Option output="otp/out/f95/otp.elf" prefix_auto="0" extension_auto="0" />
+				<Option object_output="obj/Release/" />
+				<Option type="1" />
+				<Option compiler="f95_assembler" />
+				<Compiler>
+					<Add option="-DHALL_EN=1" />
+					<Add option="-DIIR_EN=0" />
+					<Add option="-DPMU_CHG_BUCK=0" />
+					<Add option="-DHANDSHAKE_EN=0" />
+					<Add option="-DENCRYPT_EN=0" />
+					<Add option="-DWIRELESS_POWER_EN=0" />
+					<Add directory="otp/src/start" />
+					<Add directory="otp/src/key" />
+					<Add directory="otp/src/app" />
+					<Add directory="otp/src/math" />
+					<Add directory="otp/src/chargestore" />
+					<Add directory="include_lib/cpu/f95" />
+					<Add directory="include_lib/cpu/f95/pmu" />
+					<Add directory="include_lib/cpu" />
+					<Add directory="include_lib/cpu/pmu_common" />
+					<Add directory="include_lib" />
+					<Add directory="otp/src/cpu/f95" />
+					<Add directory="otp/src/cpu/f956" />
+				</Compiler>
+				<Linker>
+					<Add option="--start-group" />
+					<Add option="include_lib/libs/f95_cpu_lib.a" />
+					<Add option="--end-group" />
+					<Add option="-Totp/out/f95/app.ld" />
+					<Add option="-M=otp/out/f95/app.map" />
+				</Linker>
+				<ExtraCommands>
+					<Add after="otp\out\f95\download.bat otp" />
+					<Mode after="always" />
+				</ExtraCommands>
+			</Target>
+		</Build>
+		<Unit filename="include_lib/adc.h" />
+		<Unit filename="include_lib/app.h" />
+		<Unit filename="include_lib/communicate_api.h" />
+		<Unit filename="include_lib/cpu/f95/cpu.h" />
+		<Unit filename="include_lib/cpu/f95/f95.h" />
+		<Unit filename="include_lib/cpu/f95/io.h" />
+		<Unit filename="include_lib/cpu/f95/my_macro.h" />
+		<Unit filename="include_lib/cpu/f95/pmu/pmu.h" />
+		<Unit filename="include_lib/cpu/f95/ppm.h" />
+		<Unit filename="include_lib/cpu/pmu_common/danger_signal.h" />
+		<Unit filename="include_lib/cpu/pmu_common/pmu_common.h" />
+		<Unit filename="include_lib/io_common.h" />
+		<Unit filename="include_lib/mult.h" />
+		<Unit filename="include_lib/timer.h" />
+		<Unit filename="include_lib/uart.h" />
+		<Unit filename="otp/src/app/detect.h" />
+		<Unit filename="otp/src/cpu/f956/adc.S" />
+		<Unit filename="otp/src/cpu/f956/clock.S" />
+		<Unit filename="otp/src/cpu/f956/cpu.S" />
+		<Unit filename="otp/src/cpu/f956/pwm.S" />
+		<Unit filename="otp/src/cpu/f956/pwm.h" />
+		<Unit filename="otp/src/cpu/f956/sleep.h" />
+		<Unit filename="otp/src/cpu/f956/timer.S" />
+		<Unit filename="otp/src/cpu/f956/uart.S" />
+		<Unit filename="otp/src/key/key.h" />
+		<Unit filename="otp/src/key/msg.S" />
+		<Unit filename="otp/src/key/msg.h" />
+		<Unit filename="otp/src/math/data_compare.S" />
+		<Unit filename="otp/src/math/data_compare.h" />
+		<Unit filename="otp/src/math/div_32x16.S" />
+		<Unit filename="otp/src/math/mult_16x16.S" />
+		<Unit filename="otp/src/start/led.h" />
+		<Unit filename="otp/src/start/main.S" />
+		<Unit filename="otp/src/start/startup.S" />
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>
