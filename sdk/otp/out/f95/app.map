@@ -1,0 +1,161 @@
+Archive member included to satisfy reference by file (symbol)
+
+include_lib/libs/f95_cpu_lib.a(burn.o)
+                              obj/Release/otp/src/start/startup.o (burn_func)
+include_lib/libs/f95_cpu_lib.a(pre_operation.o)
+                              obj/Release/otp/src/start/startup.o (pro_operation)
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+otp_code         0x00000000         0x000017c0         xr
+otp_burn         0x000017c0         0x00000040         xr
+otp_deg          0x00001800         0x00000800         xr
+ram              0x00000004         0x00000040         rw
+ram1             0x00000004         0x00000020         rw
+*default*        0x00000000         0xffffffff
+
+Linker script and memory map
+
+LOAD obj/Release/otp/src/app/user_detect.o
+LOAD obj/Release/otp/src/cpu/f956/adc.o
+LOAD obj/Release/otp/src/cpu/f956/clock.o
+LOAD obj/Release/otp/src/cpu/f956/cpu.o
+LOAD obj/Release/otp/src/cpu/f956/pwm.o
+LOAD obj/Release/otp/src/cpu/f956/timer.o
+LOAD obj/Release/otp/src/cpu/f956/uart.o
+LOAD obj/Release/otp/src/key/msg.o
+LOAD obj/Release/otp/src/math/data_compare.o
+LOAD obj/Release/otp/src/math/div_32x16.o
+LOAD obj/Release/otp/src/math/mult_16x16.o
+LOAD obj/Release/otp/src/start/main.o
+LOAD obj/Release/otp/src/start/startup.o
+LOAD obj/Release/otp/src/start/user_led.o
+START GROUP
+LOAD include_lib/libs/f95_cpu_lib.a
+END GROUP
+                0x00000000                . = ORIGIN (otp_code)
+
+.otp_code       0x00000000     0x17c0
+ *startup.o(.text)
+ .text          0x00000000       0x74 obj/Release/otp/src/start/startup.o
+                0x00000000                _start
+                0x00000006                _int_0
+                0x0000000e                _int_1
+                0x00000016                _int_2
+                0x0000001e                _int_3
+                0x00000026                _int_4
+                0x0000002e                _int_5
+                0x00000036                _int_6
+                0x0000003e                _int_7
+                0x00000046                _int_8
+                0x0000004e                _int_9
+                0x00000056                _startup
+ *(.text)
+ .text          0x00000074      0x32c obj/Release/otp/src/app/user_detect.o
+                0x00000074                V_mode_detect_io_init
+                0x0000007e                vlotage_detect_io_init
+                0x000000a0                V_mode_detect
+                0x000000ca                voltage_cnt_clear
+                0x000000d0                get_voltage_1
+                0x00000102                get_voltage_2
+                0x0000013a                get_voltage_3
+                0x00000172                get_voltage_4
+                0x000001aa                Four_voltage_ptf
+                0x000001c4                final_voltage_ptf
+                0x000001de                get_voltage_avg
+                0x00000230                voltage_level_judge
+                0x00000370                vlotage_detect_fliter
+ .text          0x000003a0       0x54 obj/Release/otp/src/cpu/f956/adc.o
+                0x000003a0                _adc_continue_read
+                0x000003b8                _adc_get_voltage
+ .text          0x000003f4       0x18 obj/Release/otp/src/cpu/f956/clock.o
+                0x000003f4                clock_init
+                0x00000402                lvd_init
+ .text          0x0000040c       0x16 obj/Release/otp/src/cpu/f956/cpu.o
+                0x0000040c                f_indr0_inc
+                0x00000414                f_indr1_inc
+                0x0000041c                __set_ea_ret
+ .text          0x00000422       0x30 obj/Release/otp/src/cpu/f956/pwm.o
+                0x00000422                pwm_led_init
+                0x0000042e                set_pwm0
+                0x0000043a                set_pwm1
+                0x00000446                set_pwm2
+ .text          0x00000452       0x58 obj/Release/otp/src/cpu/f956/timer.o
+                0x00000452                tmr0_int
+                0x00000464                delay_tmr
+                0x00000476                delay_100ms
+                0x0000048e                delay
+                0x0000049e                time_out
+ .text          0x000004aa       0xa6 obj/Release/otp/src/cpu/f956/uart.o
+                0x000004aa                set_debug_baud_h
+                0x000004ae                set_debug_baud_l
+                0x000004b2                debug_init
+                0x000004e0                debug_char
+                0x000004ea                debug_n
+                0x000004f2                get_hex_data
+                0x0000050c                debug_u8_n
+                0x0000051c                debug_u8
+                0x0000053e                uart_115200
+ .text          0x00000550        0x0 obj/Release/otp/src/key/msg.o
+ .text          0x00000550       0x2a obj/Release/otp/src/math/data_compare.o
+                0x00000550                u16_compare
+ .text          0x0000057a       0x6a obj/Release/otp/src/math/div_32x16.o
+                0x0000057a                div_32x16
+ .text          0x000005e4       0x2e obj/Release/otp/src/math/mult_16x16.o
+                0x000005e4                _mult_16x16
+ .text          0x00000612       0xbe obj/Release/otp/src/start/main.o
+                0x00000612                sys_mode_sel
+                0x0000062c                sys_info_init
+                0x00000638                tmr0_isr
+                0x00000692                __pop_for_isr_comm
+                0x00000698                main
+                0x000006ce                chg_iline_set
+                0x000006ce                wpr_4k
+                0x000006ce                chg_vol_set_for_burn
+                0x000006ce                ppm_2000
+ .text          0x000006d0      0x188 obj/Release/otp/src/start/user_led.o
+                0x000006d0                led_io_init
+                0x000006fa                led_level_1
+                0x00000730                led_level_2
+                0x00000766                led_level_3
+                0x0000079c                led_level_4
+                0x000007d2                led_level_5
+                0x00000808                led_timer_deal
+ .text          0x00000858       0x44 include_lib/libs/f95_cpu_lib.a(burn.o)
+                0x00000858                bg_gear_set
+                0x00000868                burn_func
+ .text          0x0000089c       0x5a include_lib/libs/f95_cpu_lib.a(pre_operation.o)
+                0x0000089c                get_src_clk_2_div
+                0x000008aa                uart_baud_com
+                0x000008b8                uart_9600
+                0x000008ca                tmr_2ms
+                0x000008da                tmr_1ms
+                0x000008ea                pro_operation
+ *(.common)
+ *(.rodata*)
+ *(.ins)
+                0x000017c0                . = LENGTH (otp_code)
+ *fill*         0x000008f6      0xeca 7fff
+                0x000017c0                . = ORIGIN (otp_burn)
+
+.otp_burn       0x000017c0       0x40
+ *(.burn)
+ .burn          0x000017c0       0x3a include_lib/libs/f95_cpu_lib.a(burn.o)
+                0x000017f8                burn_trim
+                0x00000040                . = LENGTH (otp_burn)
+ *fill*         0x000017fa        0x6 7fff
+                0x00001800                . = ORIGIN (otp_deg)
+
+.otp_deg        0x00001800      0x800
+ *(.d_burn)
+ .d_burn        0x00001800       0xd4 include_lib/libs/f95_cpu_lib.a(burn.o)
+                0x00001800                burn_debug
+                0x00001828                burn_run
+                0x00001896                bn_check_rc
+                0x000018a0                bn_check_vbg
+                0x000018be                bn_check_vout
+                0x00000800                . = LENGTH (otp_deg)
+ *fill*         0x000018d4      0x72c 7fff
+                0x000017c0                text_size = SIZEOF (.otp_code)
+OUTPUT(otp\out\f95\otp.elf elf32-f95)
