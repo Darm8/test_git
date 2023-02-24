@@ -52,91 +52,92 @@ END GROUP
                 0x0000004e                _int_9
                 0x00000056                _startup
  *(.text)
- .text          0x00000074      0x32c obj/Release/otp/src/app/user_detect.o
+ .text          0x00000074      0x39c obj/Release/otp/src/app/user_detect.o
                 0x00000074                V_mode_detect_io_init
                 0x0000007e                vlotage_detect_io_init
                 0x000000a0                V_mode_detect
                 0x000000ca                voltage_cnt_clear
                 0x000000d0                get_voltage_1
-                0x00000102                get_voltage_2
-                0x0000013a                get_voltage_3
-                0x00000172                get_voltage_4
-                0x000001aa                Four_voltage_ptf
-                0x000001c4                final_voltage_ptf
-                0x000001de                get_voltage_avg
-                0x00000230                voltage_level_judge
-                0x00000370                vlotage_detect_fliter
- .text          0x000003a0       0x54 obj/Release/otp/src/cpu/f956/adc.o
-                0x000003a0                _adc_continue_read
-                0x000003b8                _adc_get_voltage
- .text          0x000003f4       0x18 obj/Release/otp/src/cpu/f956/clock.o
-                0x000003f4                clock_init
-                0x00000402                lvd_init
- .text          0x0000040c       0x16 obj/Release/otp/src/cpu/f956/cpu.o
-                0x0000040c                f_indr0_inc
-                0x00000414                f_indr1_inc
-                0x0000041c                __set_ea_ret
- .text          0x00000422       0x30 obj/Release/otp/src/cpu/f956/pwm.o
-                0x00000422                pwm_led_init
-                0x0000042e                set_pwm0
-                0x0000043a                set_pwm1
-                0x00000446                set_pwm2
- .text          0x00000452       0x58 obj/Release/otp/src/cpu/f956/timer.o
-                0x00000452                tmr0_int
-                0x00000464                delay_tmr
-                0x00000476                delay_100ms
-                0x0000048e                delay
-                0x0000049e                time_out
- .text          0x000004aa       0xa6 obj/Release/otp/src/cpu/f956/uart.o
-                0x000004aa                set_debug_baud_h
-                0x000004ae                set_debug_baud_l
-                0x000004b2                debug_init
-                0x000004e0                debug_char
-                0x000004ea                debug_n
-                0x000004f2                get_hex_data
-                0x0000050c                debug_u8_n
-                0x0000051c                debug_u8
-                0x0000053e                uart_115200
- .text          0x00000550        0x0 obj/Release/otp/src/key/msg.o
- .text          0x00000550       0x2a obj/Release/otp/src/math/data_compare.o
-                0x00000550                u16_compare
- .text          0x0000057a       0x6a obj/Release/otp/src/math/div_32x16.o
-                0x0000057a                div_32x16
- .text          0x000005e4       0x2e obj/Release/otp/src/math/mult_16x16.o
-                0x000005e4                _mult_16x16
- .text          0x00000612       0xbe obj/Release/otp/src/start/main.o
-                0x00000612                sys_mode_sel
-                0x0000062c                sys_info_init
-                0x00000638                tmr0_isr
-                0x00000692                __pop_for_isr_comm
-                0x00000698                main
-                0x000006ce                chg_iline_set
-                0x000006ce                wpr_4k
-                0x000006ce                chg_vol_set_for_burn
-                0x000006ce                ppm_2000
- .text          0x000006d0      0x188 obj/Release/otp/src/start/user_led.o
-                0x000006d0                led_io_init
-                0x000006fa                led_level_1
-                0x00000730                led_level_2
-                0x00000766                led_level_3
-                0x0000079c                led_level_4
-                0x000007d2                led_level_5
-                0x00000808                led_timer_deal
- .text          0x00000858       0x44 include_lib/libs/f95_cpu_lib.a(burn.o)
-                0x00000858                bg_gear_set
-                0x00000868                burn_func
- .text          0x0000089c       0x5a include_lib/libs/f95_cpu_lib.a(pre_operation.o)
-                0x0000089c                get_src_clk_2_div
-                0x000008aa                uart_baud_com
-                0x000008b8                uart_9600
-                0x000008ca                tmr_2ms
-                0x000008da                tmr_1ms
-                0x000008ea                pro_operation
+                0x00000126                get_voltage_2
+                0x00000182                get_voltage_3
+                0x000001de                get_voltage_4
+                0x0000023a                Four_voltage_ptf
+                0x00000254                final_voltage_ptf
+                0x0000026e                get_voltage_final
+                0x0000029c                voltage_level_judge
+                0x000003e0                vlotage_detect_fliter
+ .text          0x00000410       0x54 obj/Release/otp/src/cpu/f956/adc.o
+                0x00000410                _adc_continue_read
+                0x00000428                _adc_get_voltage
+ .text          0x00000464       0x18 obj/Release/otp/src/cpu/f956/clock.o
+                0x00000464                clock_init
+                0x00000472                lvd_init
+ .text          0x0000047c       0x16 obj/Release/otp/src/cpu/f956/cpu.o
+                0x0000047c                f_indr0_inc
+                0x00000484                f_indr1_inc
+                0x0000048c                __set_ea_ret
+ .text          0x00000492       0x30 obj/Release/otp/src/cpu/f956/pwm.o
+                0x00000492                pwm_led_init
+                0x0000049e                set_pwm0
+                0x000004aa                set_pwm1
+                0x000004b6                set_pwm2
+ .text          0x000004c2       0x58 obj/Release/otp/src/cpu/f956/timer.o
+                0x000004c2                tmr0_int
+                0x000004d4                delay_tmr
+                0x000004e6                delay_100ms
+                0x000004fe                delay
+                0x0000050e                time_out
+ .text          0x0000051a       0xa6 obj/Release/otp/src/cpu/f956/uart.o
+                0x0000051a                set_debug_baud_h
+                0x0000051e                set_debug_baud_l
+                0x00000522                debug_init
+                0x00000550                debug_char
+                0x0000055a                debug_n
+                0x00000562                get_hex_data
+                0x0000057c                debug_u8_n
+                0x0000058c                debug_u8
+                0x000005ae                uart_115200
+ .text          0x000005c0        0x0 obj/Release/otp/src/key/msg.o
+ .text          0x000005c0       0x2a obj/Release/otp/src/math/data_compare.o
+                0x000005c0                u16_compare
+ .text          0x000005ea       0x6a obj/Release/otp/src/math/div_32x16.o
+                0x000005ea                div_32x16
+ .text          0x00000654       0x2e obj/Release/otp/src/math/mult_16x16.o
+                0x00000654                _mult_16x16
+ .text          0x00000682       0xc8 obj/Release/otp/src/start/main.o
+                0x00000682                sys_mode_sel
+                0x0000069c                sys_info_init
+                0x000006a8                tmr0_isr
+                0x0000070a                __pop_for_isr_comm
+                0x00000710                main
+                0x00000748                chg_iline_set
+                0x00000748                wpr_4k
+                0x00000748                chg_vol_set_for_burn
+                0x00000748                ppm_2000
+ .text          0x0000074a      0x26c obj/Release/otp/src/start/user_led.o
+                0x0000074a                led_io_init
+                0x00000774                led_level_1
+                0x000007aa                led_level_2
+                0x000007e0                led_level_3
+                0x00000816                led_level_4
+                0x0000084c                led_level_5
+                0x00000882                power_on_led
+                0x00000966                led_timer_deal
+ .text          0x000009b6       0x44 include_lib/libs/f95_cpu_lib.a(burn.o)
+                0x000009b6                bg_gear_set
+                0x000009c6                burn_func
+ .text          0x000009fa       0x5a include_lib/libs/f95_cpu_lib.a(pre_operation.o)
+                0x000009fa                get_src_clk_2_div
+                0x00000a08                uart_baud_com
+                0x00000a16                uart_9600
+                0x00000a28                tmr_2ms
+                0x00000a38                tmr_1ms
+                0x00000a48                pro_operation
  *(.common)
  *(.rodata*)
  *(.ins)
                 0x000017c0                . = LENGTH (otp_code)
- *fill*         0x000008f6      0xeca 7fff
+ *fill*         0x00000a54      0xd6c 7fff
                 0x000017c0                . = ORIGIN (otp_burn)
 
 .otp_burn       0x000017c0       0x40

@@ -110,7 +110,7 @@
 #define detect_mode            [4].4    //led控制变量，没有被库用到  
 #define level_change_flag      [4].5    //led控制变量，没有被库用到
 #define low_power_flag         [4].6    //led控制变量，没有被库用到  //used
-#define a_bit_led1_flash       [4].7    //led控制变量，没有被库用到
+#define power_on_flag          [4].7    //led控制变量，没有被库用到
 //----------------------------------
 #define a_bit_led2_on          [5].0    //led控制变量，没有被库用到
 #define a_bit_led2_flash       [5].1    //led控制变量，没有被库用到
@@ -125,11 +125,17 @@
 #define a_hall_cnt         6     //hall检测变量，没有被库用到
 #endif
 #define a_tmr_cnt          7       //系统节拍变量，没有被库使用到
-#define a_key_cnt          8       //按键检测变量，没有被库使用到
-#define a_old_key          9       //按键检测变量，没有被库使用到
-#define a_used_key         10       //按键检测变量，没有被库使用到 
-#define a_last_key         11       //按键检测变量，没有被库使用到
-#define a_key_press_cnt    12       //按键检测变量，没有被库使用到
+// #define a_key_cnt          8       //按键检测变量，没有被库使用到
+// #define a_old_key          9       //按键检测变量，没有被库使用到
+// #define a_used_key         10       //按键检测变量，没有被库使用到 
+// #define a_last_key         11       //按键检测变量，没有被库使用到
+// #define a_key_press_cnt    12       //按键检测变量，没有被库使用到
+#define weighting_p13          7       //系统节拍变量，没有被库使用到
+#define weighting_p14          8       //按键检测变量，没有被库使用到
+#define weighting_p15          9       //按键检测变量，没有被库使用到
+#define weighting_p06         10       //按键检测变量，没有被库使用到 
+#define fliter_cnt            11       //按键检测变量，没有被库使用到
+#define power_on_led_step     12       //按键检测变量，没有被库使用到
 
 // #define a_led0_flash_cnt   13    //led控制变量，没有被库用到
 // #define a_led0_on_cnt      14    //led控制变量，没有被库用到
@@ -139,7 +145,7 @@
 // #define a_led2_on_cnt      18    //led控制变量，没有被库用到
 #define voltage_cnt_l      13    
 #define voltage_cnt_h      14    
-#define fliter_cnt         15    
+#define voltage_cnt_h2     15    
 #define voltage_cnt_h3     16    
 #define voltage_level      17    
 #define level_temp_reg     18    //used

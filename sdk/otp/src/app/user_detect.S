@@ -68,12 +68,23 @@ voltage_cnt_clear:
     .global get_voltage_1 ;p13
 get_voltage_1:
     adc_get_voltage(ADC_CH_P13,0)
-    w = [div_bl] %% [voltage_cnt_l] = W
-    w = [div_bh] %% [voltage_cnt_h] = W
     put_char('1')
     put_char(':')
     put_u8([div_bh])
     put_u8([div_bl])
+    ;adc电压结果保留在div_bh、div_bl当中，随后参加下面的除法
+    w = 0  %% [div_bh2] = w
+    w = 0  %% [div_bh3] = w
+    w = 64 %% [div_cl] = w  ;io口电压值除以（4*16），  16是系数，4是取平均
+    w = 0  %% [div_ch] = w 
+    call div_32x16
+    w = [div_bh] %% [mult_ah]=w
+    w = [div_bl] %% [mult_al]=w
+    w = 0x01     %% [mult_bh]=w
+    w = 0x27     %% [mult_bl]=w  ;0x127 = 295
+    call _mult_16x16  ;乘系数，结果保留在multiply_b0、multiply_b1
+    w = [multiply_b0] %% [voltage_cnt_l] += w 
+    w = [multiply_b1] %% [voltage_cnt_h] += w + C ;此时最终的voltage_cnt_l、voltage_cnt_h求和即是最终的结果
     put_u8([voltage_cnt_h])
     put_u8_n([voltage_cnt_l])
     ret
@@ -81,14 +92,25 @@ get_voltage_1:
     .global get_voltage_2 ;p14
 get_voltage_2:
     adc_get_voltage(ADC_CH_P14,0)
-    w = [div_bl] %% [voltage_cnt_l] += w 
-    w = [div_bh] %% [voltage_cnt_h] += w + C
     put_char('2')
     put_char(':')
     put_u8([div_bh])
     put_u8([div_bl])
-    put_u8([voltage_cnt_h])
-    put_u8_n([voltage_cnt_l])
+    ;adc电压结果保留在div_bh、div_bl当中，随后参加下面的除法
+    w = 0  %% [div_bh2] = w
+    w = 0  %% [div_bh3] = w
+    w = 68 %% [div_cl] = w  ;io口电压值除以（4*17），  17是系数，4是取平均
+    w = 0  %% [div_ch] = w 
+    call div_32x16
+    w = [div_bh] %% [mult_ah]=w
+    w = [div_bl] %% [mult_al]=w
+    w = 0x01     %% [mult_bh]=w
+    w = 0x27     %% [mult_bl]=w  ;0x127 = 295
+    call _mult_16x16  ;乘系数，结果保留在multiply_b0、multiply_b1
+    w = [multiply_b0] %% [voltage_cnt_l] += w 
+    w = [multiply_b1] %% [voltage_cnt_h] += w + C ;此时最终的voltage_cnt_l、voltage_cnt_h求和即是最终的结果
+    put_u8([multiply_b1])
+    put_u8_n([multiply_b0])
     if(CY == 0)skip
     put_char('E')
     ret
@@ -96,14 +118,25 @@ get_voltage_2:
     .global get_voltage_3 ;p15
 get_voltage_3:
     adc_get_voltage(ADC_CH_P15,0)
-    w = [div_bl] %% [voltage_cnt_l] += w
-    w = [div_bh] %% [voltage_cnt_h] += w + C
     put_char('3')
     put_char(':')
     put_u8([div_bh])
     put_u8([div_bl])
-    put_u8([voltage_cnt_h])
-    put_u8_n([voltage_cnt_l])
+    ;adc电压结果保留在div_bh、div_bl当中，随后参加下面的除法
+    w = 0  %% [div_bh2] = w
+    w = 0  %% [div_bh3] = w
+    w = 76 %% [div_cl] = w  ;io口电压值除以（4*19），  19是系数，4是取平均
+    w = 0  %% [div_ch] = w 
+    call div_32x16
+    w = [div_bh] %% [mult_ah]=w
+    w = [div_bl] %% [mult_al]=w
+    w = 0x01     %% [mult_bh]=w
+    w = 0x27     %% [mult_bl]=w  ;0x127 = 295
+    call _mult_16x16  ;乘系数，结果保留在multiply_b0、multiply_b1
+    w = [multiply_b0] %% [voltage_cnt_l] += w 
+    w = [multiply_b1] %% [voltage_cnt_h] += w + C ;此时最终的voltage_cnt_l、voltage_cnt_h求和即是最终的结果
+    put_u8([multiply_b1])
+    put_u8_n([multiply_b0])
     if(CY == 0)skip
     put_char('E')
     ret
@@ -115,21 +148,63 @@ get_voltage_4:
 #else
     adc_get_voltage(ADC_CH_P06,0)
 #endif
-    w = [div_bl] %% [voltage_cnt_l] += w
-    w = [div_bh] %% [voltage_cnt_h] += w + C
     put_char('4')
     put_char(':')
     put_u8([div_bh])
     put_u8([div_bl])
-    put_u8([voltage_cnt_h])
-    put_u8_n([voltage_cnt_l])
+    ;adc电压结果保留在div_bh、div_bl当中，随后参加下面的除法
+    w = 0  %% [div_bh2] = w
+    w = 0  %% [div_bh3] = w
+    w = 60 %% [div_cl] = w  ;io口电压值除以（4*15），  15是系数，4是取平均
+    w = 0  %% [div_ch] = w 
+    call div_32x16
+    w = [div_bh] %% [mult_ah]=w
+    w = [div_bl] %% [mult_al]=w
+    w = 0x01     %% [mult_bh]=w
+    w = 0x27     %% [mult_bl]=w  ;0x127 = 295
+    call _mult_16x16  ;乘系数，结果保留在multiply_b0、multiply_b1
+    w = [multiply_b0] %% [voltage_cnt_l] += w 
+    w = [multiply_b1] %% [voltage_cnt_h] += w + C ;此时最终的voltage_cnt_l、voltage_cnt_h求和即是最终的结果
+    put_u8([multiply_b1])
+    put_u8_n([multiply_b0])
     if(CY == 0)skip
     put_char('E')
     ret
+
+;     .global get_voltage_4 ;p06
+; get_voltage_4:
+; #if IDE_DEBUG_IO
+;     adc_get_voltage(ADC_CH_P15,0)
+; #else
+;     adc_get_voltage(ADC_CH_P06,0)
+; #endif
+;     w = [div_bh] %% [mult_ah]=w
+;     w = [div_bl] %% [mult_al]=w
+;     w = 0x01     %% [mult_bh]=w
+;     w = 0x27     %% [mult_bl]=w  ;0x127 = 295
+;     call _mult_16x16  ;乘系数，结果保留在multiply_b0、multiply_b1
+;     w = 0  %% [div_bh2] = w
+;     w = 0  %% [div_bh3] = w
+;     w = [multiply_b0] %% [div_bl] = w
+;     w = [multiply_b1] %% [div_bh] = w
+;     w = 60 %% [div_cl] = w  ;除以（4*15），  15是系数，4是取平均
+;     w = 0  %% [div_ch] = w 
+;     call div_32x16
+;     w = [div_bl] %% [voltage_cnt_l] += w 
+;     w = [div_bh] %% [voltage_cnt_h] += w + C
+;     put_char('4')
+;     put_char(':')
+;     put_u8([div_bh])
+;     put_u8([div_bl])
+;     put_u8([voltage_cnt_h])
+;     put_u8_n([voltage_cnt_l])
+;     if(CY == 0)skip
+;     put_char('E')
+;     ret
     
     .global Four_voltage_ptf
 Four_voltage_ptf:
-    put_char('4')
+    put_char('T')
     put_char('-')
     put_char('V')
     put_char(':')
@@ -153,8 +228,8 @@ final_voltage_ptf:
 ;************************************************
 ;     结果保存在voltage_cnt_l、voltage_cnt_h
 ;************************************************
-    .global get_voltage_avg
-get_voltage_avg:
+    .global get_voltage_final
+get_voltage_final:
     call voltage_cnt_clear
     call get_voltage_1
     delay_ms(10)
@@ -163,16 +238,6 @@ get_voltage_avg:
     call get_voltage_3
     delay_ms(10)
     call get_voltage_4
-    call Four_voltage_ptf
-    w = [voltage_cnt_l] %% [div_bl] = w
-    w = [voltage_cnt_h] %% [div_bh] = w
-    w = 0 %% [div_bh2] = w
-    w = 0 %% [voltage_cnt_l] = w
-    w = 4 %% [div_cl] = w
-    w = 0 %% [div_ch] = w    
-    call div_32x16
-    w = [div_bl] %% [voltage_cnt_l] = w
-    w = [div_bh] %% [voltage_cnt_h] = w
     call final_voltage_ptf
     call voltage_level_judge
     ret
@@ -187,23 +252,23 @@ voltage_level_judge:
   _judge_mode_48v:
     w = [voltage_cnt_h] %% u16_ah = w
     w = [voltage_cnt_l] %% u16_al = w
-    K_2_U16_B(3150) //0x0c4e
+    K_2_U16_B(48500) 
     call u16_compare
     if(U16_LESS) skip
     goto __vlotage_level_1
-    K_2_U16_B(3000) //0x0BB8
+    K_2_U16_B(45500) 
     call u16_compare
     if(U16_LESS) skip
     goto __vlotage_level_2
-    K_2_U16_B(2850) //0x0B22
+    K_2_U16_B(43500) 
     call u16_compare
     if(U16_LESS) skip
     goto __vlotage_level_3
-    K_2_U16_B(2700) //0x0A8C
+    K_2_U16_B(40500) 
     call u16_compare
     if(U16_LESS) skip
     goto __vlotage_level_4
-    K_2_U16_B(2550) //0x09F6
+    K_2_U16_B(38500) 
     call u16_compare
     if(U16_LESS) skip
     goto __vlotage_level_5
@@ -212,23 +277,23 @@ voltage_level_judge:
   _judge_mode_36v:
     w = [voltage_cnt_h] %% u16_ah = w
     w = [voltage_cnt_l] %% u16_al = w
-    K_2_U16_B(2310)
+    K_2_U16_B(39500)
     call u16_compare
     if(U16_LESS) skip
     goto __vlotage_level_1
-    K_2_U16_B(2210)
+    K_2_U16_B(37500)
     call u16_compare
     if(U16_LESS) skip
     goto __vlotage_level_2
-    K_2_U16_B(2110)
+    K_2_U16_B(35000)
     call u16_compare
     if(U16_LESS) skip
     goto __vlotage_level_3
-    K_2_U16_B(2010)
+    K_2_U16_B(32500)
     call u16_compare
     if(U16_LESS) skip
     goto __vlotage_level_4
-    K_2_U16_B(1910)
+    K_2_U16_B(30500)
     call u16_compare
     if(U16_LESS) skip
     goto __vlotage_level_5
@@ -281,9 +346,12 @@ voltage_level_judge:
     ; ret
 
   __vlotage_to_led:
+    if(power_on_flag == 1)skip
+    goto _jump_fliter
     call vlotage_detect_fliter
     if(level_change_flag == 1)skip
     ret
+_jump_fliter:
     w = [voltage_level]
     dw_not_equ_skip(1)
     call led_level_1
@@ -331,8 +399,6 @@ __equ:
 __fliter_end:
     w = [voltage_level] %% [level_temp_reg] = w
     ret
-
-
 
 
 

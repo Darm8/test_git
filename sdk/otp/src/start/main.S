@@ -76,17 +76,21 @@ tmr0_isr:
         [a_tmr_1s_cnt] = 0
         a_evt_1s = 1
         ; put_char('1')
+        if(power_on_flag == 1)skip
+        goto __5s_detect
         if(low_power_flag == 0)skip
         call led_timer_deal
     __5s_detect:
-        w = 3;11 
+        w = 8;11 
         dw_is_equ_skip([a_tmr_5s_cnt])
         goto __tmr0_evt_5s_end
         [a_tmr_5s_cnt] = 0
         a_evt_5s = 1
         ; put_char('5')
+        if(power_on_flag == 1)skip
+        goto __tmr0_evt_5s_end
         call V_mode_detect
-        call get_voltage_avg
+        call get_voltage_final
 
     __tmr0_evt_5s_end:
         [a_tmr_5s_cnt]++
@@ -205,18 +209,19 @@ main:
 
         UART_POWER_UP
 
-
+        power_on_flag = 0
         CALL tmr0_int
 
         set_ea
         delay_ms(50)
+
         put_char_n('S')
         ; user2.14 ----- 
         call V_mode_detect_io_init
         call vlotage_detect_io_init
+        ; call led_level_1
         call led_io_init
-        call led_level_1
-        
+        call power_on_led
 
      __die_here:
     ;  put_char('a')
