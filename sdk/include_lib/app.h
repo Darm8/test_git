@@ -10,7 +10,7 @@
         dw_is_equ_skip([a_sys_mode]) \
         GOTO next
 
-
+//123456451418547u1
 #if HALL_EN
 #define OPEN_LID_MODE    0
 #define CLOSE_LID_MODE   1
