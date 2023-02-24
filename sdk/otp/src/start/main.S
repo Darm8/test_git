@@ -212,7 +212,7 @@ main:
         power_on_flag = 0
         CALL tmr0_int
 
-        set_ea
+        set_ea;开中断
         delay_ms(50)
 
         put_char_n('S')
